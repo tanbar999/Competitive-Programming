@@ -1,0 +1,41 @@
+static class Pair
+	{
+		int x;
+		int y;
+		
+		//CONSTRUCTOR
+		public Pair(int x , int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+		
+		public Pair[] pairSort(Pair[] arr , int size , boolean flag)
+		{
+			if(flag)
+			{
+				Arrays.parallelSort(arr , new Comparator<Pair>() {
+					@Override
+					public int compare(Pair p1 , Pair p2)
+					{
+						if(p1.x == p2.x)
+							return p1.y - p2.y;
+						else
+							return p1.x - p2.x;
+					}
+				});
+			}
+			else
+			{
+				Arrays.parallelSort(arr , new Comparator<Pair>() {
+					@Override
+					public int compare(Pair p1 , Pair p2)
+					{
+						return p1.x - p2.x;
+					}
+				});
+			}
+			
+			return arr;
+		}
+	}
