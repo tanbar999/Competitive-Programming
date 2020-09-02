@@ -1,0 +1,45 @@
+static class DSJ
+	{
+		int[] parent;
+		
+		public DSJ(int size)
+		{
+			parent = new int[size+1];
+			Arrays.fill(parent,-1);
+		}
+		
+		public int Find(int i)
+		{
+			if(parent[i] < 0)
+				return i;
+			
+			return Find(parent[i]);
+		}
+		
+		public void Union(int i, int j)
+		{
+			int p1 = Find(i);
+			int p2 = Find(j);
+			
+			if(p1 == p2)
+			{
+				System.out.println("Vertex : " + i + " -> " + j + " WILL FORM A CYCLE");
+				return;
+			}
+			
+			if(Math.abs(parent[p1]) >= Math.abs(parent[p2]))
+			{
+				int temp = parent[p2];
+				parent[p2] = p1;
+				parent[p1] = -(Math.abs(parent[p1]) + Math.abs(temp));
+				
+			}
+			else
+			{
+				
+				int temp = parent[p1];
+				parent[p1] = p2;
+				parent[p2] = -(Math.abs(parent[p2]) + Math.abs(temp));
+			}
+		}
+	}
